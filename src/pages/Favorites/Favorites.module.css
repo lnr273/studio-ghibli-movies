@@ -1,0 +1,7 @@
+.favorites {
+    display: flex;
+    flex-wrap: wrap;
+}
+.favorites h3 {
+    margin: 2rem;
+}

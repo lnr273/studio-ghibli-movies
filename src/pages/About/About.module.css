@@ -1,0 +1,15 @@
+.text {
+    display: flex;
+    width: 90%;
+}
+
+.part1 {
+    padding-inline: 3.5rem;
+    padding-block: 3.5rem;
+    text-align: left;
+}
+.part2 {
+    padding-inline: 3.5rem;
+    padding-block: 1rem;
+    text-align: left;
+}

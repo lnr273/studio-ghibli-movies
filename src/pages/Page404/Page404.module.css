@@ -1,0 +1,16 @@
+.error {
+    padding-top: 100px;
+}
+.error div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-block: 1rem;
+}
+.error input {
+    width: 400px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}

@@ -1,0 +1,21 @@
+.movieDetail {
+    display: flex;
+    padding-block: 3.5rem;
+}
+
+.movieDetail .poster {
+    width: 430px;
+    height: auto;
+}
+
+.table {
+    display: flex;
+    width: 530px;
+    max-height: 610px;
+    margin-left: 50px;
+}
+
+.table th, td {
+    padding: 10px;
+    max-height: 80px;
+}

@@ -1,0 +1,33 @@
+.verticalCard {
+    /* border: 1px solid #000; */
+    height: 270px;
+    width: 155px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.verticalCard img {
+    width: 155px;
+    height: 211px;    
+}
+.verticalCard .info {
+    padding: 0.5rem;
+    height: 50px;
+}
+.verticalCard .info:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.verticalCard .favorite {
+    width: 25px;
+    height: auto;
+    position: absolute;
+    margin: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+a {
+    color: var(--black);
+}

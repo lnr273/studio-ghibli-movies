@@ -1,0 +1,21 @@
+.bestRated {
+    display: flex;
+    justify-content: center;
+    /* flex-direction: column;
+    min-width: 280px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto; */
+}
+.bestRated div {
+    width: 950px;
+    height: 500px;
+}
+.posters{
+    width: 90%;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}

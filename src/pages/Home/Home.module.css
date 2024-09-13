@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+.home .more {
+    width: 160px;
+    height: 40px;
+    margin-block: 1rem;
+    border: none;
+    background-color: var(--primary);
+    color: var(--white);
+    font-size: 1rem;
+    border-radius: 8px;
+}
+.home .more:hover {
+    cursor: pointer;
+    background-color: rgb(24, 138, 180);
+}

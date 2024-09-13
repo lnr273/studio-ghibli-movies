@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 10px;
+    width: 100%;
+    height: 55px;
+    position: fixed;
+    background-color: var(--primary);
+    z-index: 9999;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+.links{
+    width: 80%;
+    display: flex;
+    justify-content: end;
+}
+.links a {
+    text-decoration: none;
+    margin: 0.5rem;
+    color: var(--white);
+}
+
+.header button {
+    width: 70px;
+    height: 32px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    margin-inline: 6px;
+    cursor: pointer;
+}
+.header button.login {
+    background-color: #E3E3E3;
+    color: #2C2C2C;
+}
+.header button.register {
+    background-color: #2C2C2C;
+    color: #E3E3E3;
+}
