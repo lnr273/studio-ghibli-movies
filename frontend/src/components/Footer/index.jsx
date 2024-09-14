@@ -6,7 +6,7 @@ function Footer() {
         <footer className={styles.footer}>
             <span>Desenvolvido por Luan &copy; {new Date().getFullYear()}</span>
             <a href="https://github.com/lnr273" target='_blank' rel='noopener noreferrer'>
-                    <DiGithubBadge className={styles.github}/>
+                <DiGithubBadge className={styles.github}/>
             </a>
         </footer>
     );

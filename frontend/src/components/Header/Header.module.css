@@ -1,7 +1,7 @@
 .header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding-inline: 10px;
     width: 100%;
     height: 55px;
@@ -24,22 +24,50 @@
     text-decoration: none;
     margin: 0.5rem;
     color: var(--white);
+    transition: 0.5s ease;
+}
+.links a:hover {
+    /* text-decoration: underline; */
+    scale: 1.1;
 }
 
-.header button {
-    width: 70px;
-    height: 32px;
-    padding: 8px;
-    border: none;
-    border-radius: 8px;
-    margin-inline: 6px;
-    cursor: pointer;
+@media (max-width: 1020px) {
+    .menuBtn {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 15px;
+    }
+    .menuBtn .row {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+    }
+    .links {
+        display: none;
+    }
+    .show {
+        display: flex;
+        width: 50%;
+        height: auto;
+        padding: 10px;
+        position: absolute;
+        top: 55px;
+        right: 0;
+        background-color: var(--primary);
+        flex-direction: column;
+    }
 }
-.header button.login {
-    background-color: #E3E3E3;
-    color: #2C2C2C;
-}
-.header button.register {
-    background-color: #2C2C2C;
-    color: #E3E3E3;
+
+@media (max-width: 480px) {
+    .show {
+        width: 100%;
+    }
 }

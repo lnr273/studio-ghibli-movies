@@ -36,7 +36,7 @@ function Search() {
                         result.length > 0 ? 
                             result.map(r => <VerticalCard key={r.id} movie={r}/>)
                         :
-                            <h1>Nenhum resultado</h1>
+                            <h1>There is no content for &quot;{params.s}&quot;</h1>
                     }                    
                 </div>
 

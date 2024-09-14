@@ -11,6 +11,13 @@ function SearchMovie() {
     
     return (
         <div className={styles.search}>
+            <input 
+                style={searchVisible ? {display: "flex"} : {display: "none"}}
+                type="text" 
+                placeholder='Search by name, year or genre...'
+                value={inputValue}
+                onChange={e => setInputValue(e.target.value)}
+            />
             <img src="/src/components/SearchMovie/search.svg" alt="search icon" 
 
             onClick={() => {
@@ -19,13 +26,6 @@ function SearchMovie() {
                 setInputValue("")
             }}/>
 
-            <input 
-                style={searchVisible ? {display: "flex"} : {display: "none"}}
-                type="text" 
-                placeholder='Search by name, year or genre...'
-                value={inputValue}
-                onChange={e => setInputValue(e.target.value)}
-            />
         </div>
     );
 }

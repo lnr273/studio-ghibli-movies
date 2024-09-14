@@ -16,3 +16,9 @@
     font-size: 1.75rem;
     color: white;
 }
+
+@media(max-width: 720px) {
+    .footer span {
+        font-size: 14px;
+    }
+}

@@ -14,7 +14,6 @@ function Login() {
                     <LoginForm />
                     <RegisterForm />
                 </div>
-
             </Container>
             <Footer />
         </>

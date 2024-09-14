@@ -23,3 +23,9 @@ a {
     border-bottom-right-radius: 10px;
     /* transition: 0.5s ease;  consertar essa transição */
 }
+
+@media(max-width: 780px) {
+    .slide h2 {
+        font-size: 15px;
+    }
+}

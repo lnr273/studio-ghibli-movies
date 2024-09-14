@@ -13,6 +13,7 @@
 }
 .search img {
     margin-inline: 8px;
+    width: 24px;
 }
 .search img:hover {
     cursor: pointer;

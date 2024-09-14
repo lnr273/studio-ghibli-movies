@@ -1,7 +1,6 @@
 .verticalCard {
-    /* border: 1px solid #000; */
-    height: 270px;
     width: 155px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -14,6 +13,7 @@
 .verticalCard .info {
     padding: 0.5rem;
     height: 50px;
+    color: var(--black);
 }
 .verticalCard .info:hover {
     text-decoration: underline;
@@ -28,6 +28,22 @@
     cursor: pointer;
 }
 
-a {
-    color: var(--black);
+@media(max-width: 1070px) {
+    .verticalCard {
+        width: 120px;
+    }
+    .verticalCard img {
+        width: 120px;
+        height: 170px;
+    }
+}
+@media(max-width: 780px) {
+    .verticalCard {
+        width: 155px;
+        height: 250px;
+    }
+    .verticalCard img {
+        width: 155px;
+        height: 211px;
+    }
 }

@@ -22,13 +22,12 @@ function Home() {
     }, [])
     
     useEffect(() => {
-        const response = async () => {
+        const getMovies = async () => {
             const response = await fetch("http://localhost:3000/movies")
             const data = await response.json()
             setMovies(data)
         }
-
-        response()
+        getMovies()
     }, [])
 
     return (

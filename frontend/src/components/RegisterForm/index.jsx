@@ -2,7 +2,7 @@ import styles from './RegisterForm.module.css'
 
 function RegisterForm() {
     return (
-        <div className={styles.login}>
+        <div className={styles.register}>
             <h2>Register a new account</h2>
             <form action="post">
                 <label>Username</label>
