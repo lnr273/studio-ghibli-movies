@@ -1,12 +1,12 @@
 export function regexValidation(obj) {
     const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
-    const regexUsername = /[a-z]/
+    const regexUsername = /^[\w-\._-]+$/
 
     if (!regexEmail.test(obj.email)) {
         return {regexMessage: "E-mail is not valid. Here is an example: 'user@gmail.com'"}
     }
     if(!regexUsername.test(obj.username)) {
-        return {regexMessage: "Username is not valid. You can use taltaltal"}
+        return {regexMessage: "Username is not valid. Special characters accepted are: . - _"}
     }
     return obj
 }

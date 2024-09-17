@@ -11,14 +11,14 @@ class UsersRepository {
         return query(sql, "Not found")    
     }
 
-    findById(id) {
-        const sql = "SELECT * FROM users WHERE id = ?"
-        return query(sql, id, `Id ${id} not found`)
+    findByUsername(username) {
+        const sql = "SELECT * FROM users WHERE username = ?"
+        return query(sql, username, `Username '${username}' not found`)
     }
 
-    async update(data, id) {
-        const sql = "UPDATE users SET ?  WHERE id = ?"
-        return query(sql, [data, id], "Not able to update")       
+    selectFavorites(id) {
+        const sql = "SELECT movieId FROM favorites WHERE userId = ?"
+        return query(sql, id, `Favorites movies not found or not exists`)
     }
 
     delete(id) {

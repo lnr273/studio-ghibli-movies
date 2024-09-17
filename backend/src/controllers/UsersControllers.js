@@ -9,7 +9,7 @@ class UsersControllers {
     }
 
     async showById(req, res) {
-        const {id} = req.params
+        const { id } = req.params
         try {
             const result = await UsersRepository.findById(id)
             res.status(200).json(result)            
@@ -25,14 +25,36 @@ class UsersControllers {
 
     }
 
-    async update(req, res) {
-        const data = req.body
-        const { id } = req.params
-        try {
-            const result = await UsersRepository.update(data, id)
-            res.status(201).json(result)
-        } catch (err) {res.status(400).send(err)}
+    async login(req, res) {
+        const { user, password } = req.body
+        const userExists = await UsersRepository.findByUsername(user)
+        const { id } = userExists[0]
 
+        if (userExists && password) {
+            if (req.session.authenticated) {
+                res.json(req.session)
+            } else {
+                if (password === (userExists[0].password || emailExists[0].password)) {
+                    req.session.authenticated = true
+                    req.session.user = { user, id }
+                    res.json(req.session)
+                } else {
+                    res.status(403).json({ "msg": "Bad credentials"})
+                }
+            }
+        } else {
+            res.status(403).json({ "msg": "Bad credentials"})
+        }
+    }
+
+    async getFavorites(req, res) {
+        if (req.session.user) {
+            const {id} = req.session.user
+            const favorites = await UsersRepository.selectFavorites(id)
+            res.json(favorites)        
+        } else {
+            res.json({"msg": "not authenticated"})
+        }
     }
 
     async delete(req, res) {

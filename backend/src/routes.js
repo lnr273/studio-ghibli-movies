@@ -5,8 +5,17 @@ const router = Router()
 
 router.get("/users", UsersControllers.showAll)
 router.get("/users/:id", UsersControllers.showById)
+
+// Create new user
 router.post("/users", UsersControllers.create)
-router.put("/users/:id", UsersControllers.update)
+
+// User login
+router.post("/login", UsersControllers.login)
+
+// MOSTRA TODOS OS SALVOS
+router.get("/favorites", UsersControllers.getFavorites)
+
+// EXCLUIR CONTA
 router.delete("/users/:id", UsersControllers.delete)
 
 export default router
