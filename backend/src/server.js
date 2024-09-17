@@ -1,7 +1,7 @@
 import app from "./app.js"
 import connection from "./database/connection.js"
 
-const port = 3000
+const port = 4000
 
 connection.connect((err) => {
     if (err) {
