@@ -16,13 +16,15 @@ function MovieDetail({movie}) {
         getInfo()
     }, [movie])
 
+    // ADICIONAR INFOS AO BANCO DE DADOS
+
     return (
         <>
             {
                 info && movie && (
                     <div className={styles.movieDetail}>
                         <div>
-                            <img className={styles.poster} src={movie.images.poster} alt="" />                    
+                            <img className={styles.poster} src={movie.poster} alt="" />                    
                         </div>
                         <div className={styles.table}>
                             <table>
@@ -37,7 +39,7 @@ function MovieDetail({movie}) {
                                         <th>Year</th><td>{movie.year}</td>
                                     </tr>
                                     <tr>
-                                        <th>IMDb rating</th><td>{info.Ratings[0].Value}</td>
+                                        <th>IMDb rating</th><td>⭐{info.Ratings[0].Value}</td>
                                     </tr>
                                     <tr>
                                         <th>Writer</th><td>{info.Writer}</td>

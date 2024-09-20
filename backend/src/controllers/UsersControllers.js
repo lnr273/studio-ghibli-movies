@@ -1,70 +1,113 @@
-import UsersRepository from "../repositories/UsersRepository.js"
+import { validateUser } from "../../utils/validateUser.js";
+import { connection } from "../server.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+const saltRounds = 10;
 
 class UsersControllers {
-    async showAll(req, res) {
-        const result = await UsersRepository.findAll()
+    async showAllUsers(req, res) {
         try {
-            res.status(200).json(result)            
-        } catch (err) {res.status(404).send(err)}
+            const sql = "SELECT * FROM users";
+            const [result] = await connection.query(sql);
+            return res.status(200).json(result);
+        } catch (err) {
+            return res.status(500).json({ error: 'Server error' });
+        }
     }
 
-    async showById(req, res) {
-        const { id } = req.params
+    async showUserById(req, res) {
         try {
-            const result = await UsersRepository.findById(id)
-            res.status(200).json(result)            
-        } catch (err) {res.status(404).send(err)}
+            const { id } = req.params;
+            const sql = "SELECT * FROM users WHERE id = ?";
+            const [result] = await connection.query(sql, id, `Id '${id}' not found`);
+            res.status(200).json(result[0]);
+        } catch (err) {
+            res.status(404).json({ error: err });
+        }
     }
 
-    async create(req, res) {
-        const data = req.body
+    async register(req, res) {
         try {
-            const result = await UsersRepository.create(data)
-            res.status(201).json(result)            
-        } catch (err) {res.status(400).send(err)}
+            const {username, email, password} = req.body;
+            const selectSql = `SELECT * FROM users WHERE username = ?`;
+            const [selectResults] = await connection.query(selectSql, username);
+            if (selectResults.length > 0) {
+                return res.status(500).json({ error: "User already exists" });
+            }
 
+            // User does not exists, follow to hash the password
+            bcrypt.hash(password, saltRounds, async (bcryptErr, hash) => {
+                if (bcryptErr) {
+                    return res.status(500).json({ error: bcryptErr });
+                }
+                
+                const dataValidated = validateUser({username, email});
+                if (!dataValidated.isValid) {
+                    return res.status(403).json({ error: dataValidated.alertMessage });
+                }
+                
+                const insertSql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+                const [insertResults] = await connection.query(insertSql, [username, email, hash]);
+
+                const response = {
+                    message: "User registered sucessfully",
+                    userCreated: {
+                        userId: insertResults.insertId,
+                        username,
+                        email
+                    }
+                };
+                return res.status(201).json(response);
+            })
+        } catch (err) {
+            res.json(err);
+        }
     }
 
     async login(req, res) {
-        const { user, password } = req.body
-        const userExists = await UsersRepository.findByUsername(user)
-        const { id } = userExists[0]
+        const { user, password } = req.body;
+        const sql = "SELECT * FROM users WHERE username = ? OR email = ?";
+        const [results] = await connection.query(sql, [user, user]);
+        if (results.length < 1) {
+            return res.status(401).json({ error: "Authentication failure" });
+        }
 
-        if (userExists && password) {
-            if (req.session.authenticated) {
-                res.json(req.session)
-            } else {
-                if (password === (userExists[0].password || emailExists[0].password)) {
-                    req.session.authenticated = true
-                    req.session.user = { user, id }
-                    res.json(req.session)
-                } else {
-                    res.status(403).json({ "msg": "Bad credentials"})
-                }
+        bcrypt.compare(password, results[0].password, (err, result) => {
+            if (err) {
+                return res.status(401).json({ error: "Authentication failure" });
             }
-        } else {
-            res.status(403).json({ "msg": "Bad credentials"})
-        }
+            if (result) {
+                const token = jwt.sign({
+                    id: results[0].id,
+                    user: results[0].username
+                }, process.env.JWT_KEY,
+                {
+                    expiresIn: "5d"
+                })
+                
+                return res.status(200).json({
+                    alert: "Authentication sucessfull",
+                    token,
+                    ok: true
+                });
+            }
+            return res.status(401).json({ error: "Authentication failure", ok: false });
+        });
     }
 
-    async getFavorites(req, res) {
-        if (req.session.user) {
-            const {id} = req.session.user
-            const favorites = await UsersRepository.selectFavorites(id)
-            res.json(favorites)        
-        } else {
-            res.json({"msg": "not authenticated"})
-        }
-    }
 
     async delete(req, res) {
-        const { id } = req.params
         try {
-            const result = await UsersRepository.delete(id)
-            res.status(204).json(result)            
-        } catch (err) {res.status(400).send(err)}
+            const { id } = req.params;
+            const sql = "DELETE FROM users WHERE id = ?";
+            const result = await query(sql, id, "Not able to delete");
+            res.status(204).json(result);
+        } catch (err) {
+            res.status(400).send(err);
+        }
 
     }
 }
 
-export default new UsersControllers()
+export default new UsersControllers();

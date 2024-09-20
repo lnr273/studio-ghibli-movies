@@ -13,8 +13,8 @@ function Card({movie}) {
 
     return (
         <div className={styles.card}>
-            <img className={styles.poster} src={movie.images.background} alt={`${movie.title} image`} />
-            <Link to={`/movies/${movie.title.toLowerCase().split(" ").join("-")}`}>
+            <img className={styles.poster} src={movie.background} alt={`${movie.title} image`} />
+            <Link to={`/movies/${movie.title}`}>
                 <div className={styles.detail}>
                     <h4 className={styles.movieName}>{movie.title}</h4>
                 </div>              

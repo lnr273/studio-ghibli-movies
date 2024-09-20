@@ -11,9 +11,9 @@ function About() {
 
     useEffect(() => {
         const getBanner = async () => {
-            const response = await fetch("http://localhost:3000/banner")
+            const response = await fetch("http://localhost:4000/banner/about")
             const data = await response.json()
-            setBanner(data.about)
+            setBanner(data[0].image)
         }
         getBanner()
     }, [])

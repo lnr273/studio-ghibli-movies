@@ -14,16 +14,16 @@ function Home() {
 
     useEffect(() => {
         const getBanner = async () => {
-            const response = await fetch("http://localhost:3000/banner")
+            const response = await fetch("http://localhost:4000/banner/home")
             const data = await response.json()
-            setBanner(data.home)
+            setBanner(data[0].image)
         }
         getBanner()
     }, [])
     
     useEffect(() => {
         const getMovies = async () => {
-            const response = await fetch("http://localhost:3000/movies")
+            const response = await fetch("http://localhost:4000/movies-for-home")
             const data = await response.json()
             setMovies(data)
         }

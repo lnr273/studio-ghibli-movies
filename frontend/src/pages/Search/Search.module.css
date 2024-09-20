@@ -6,7 +6,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 25px;
     margin-block: 3rem;
     max-width: 1180px;
 }

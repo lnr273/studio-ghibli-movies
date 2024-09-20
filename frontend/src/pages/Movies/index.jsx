@@ -15,7 +15,7 @@ function Movies() {
 
     useEffect(() => {
         const getData = async () => {
-            const response = await fetch("http://localhost:3000/movies")
+            const response = await fetch("http://localhost:4000/movies")
             const data = await response.json()
             data.sort((a, b) => a.year - b.year)
             setMovies(data)
@@ -24,9 +24,9 @@ function Movies() {
     }, [])
     useEffect(() => {
         const getBanner = async () => {
-            const response = await fetch("http://localhost:3000/banner")
+            const response = await fetch("http://localhost:4000/banner/movies")
             const data = await response.json()
-            setBanner(data.movies)
+            setBanner(data[0].image)
         }
         getBanner()
     }, [])
@@ -48,7 +48,7 @@ function Movies() {
                 <div className={styles.posters}>
                     {
                         movies.map(movie => (
-                            <VerticalCard key={movie.id} movie={movie}/>                            
+                            <VerticalCard key={movie.id} movie={movie}/>
                         ))
                     }
                 </div>

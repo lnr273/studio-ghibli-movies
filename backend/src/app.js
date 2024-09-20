@@ -1,18 +1,16 @@
-import express from "express"
-import router from "./routes.js"
-import cors from 'cors'
-import session from "express-session"
+import express from "express";
+import cors from 'cors';
+import userRouter from "./routes/users.js";
+import moviesRouter from "./routes/movies.js";
+import bannerRouter from "./routes/banner.js";
 
-const app = express()
+const app = express();
 
-app.use(express.json())
-app.use(cors())
-app.use(session({
-    secret: "27d-03M-200y6",
-    resave: false,
-    saveUninitialized: false
-}))
+app.use(express.json());
+app.use(cors());
 
-app.use(router)
+app.use(userRouter);
+app.use(moviesRouter);
+app.use(bannerRouter);
 
-export default app
+export default app;

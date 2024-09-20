@@ -13,7 +13,7 @@ function VerticalCard({movie}) {
 
     return (
         <div className={styles.verticalCard}>
-            <img src={movie.images.poster} alt={`${movie.title} poster`} />
+            <img src={movie.poster} alt={`${movie.title} poster`} />
             <Link to={`/movies/${movie.title.toLowerCase().split(" ").join("-")}`}>
                 <span className={styles.info}>{movie.title} ({movie.year})</span>
             </Link>

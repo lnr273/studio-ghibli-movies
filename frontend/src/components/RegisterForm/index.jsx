@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import styles from './RegisterForm.module.css'
-import { regexValidation, validateUser } from '../../../../backend/utils/validateUser.js';
 
 function RegisterForm() {
 
@@ -13,35 +12,6 @@ function RegisterForm() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-
-        const user = { username, email, password }
-        const { regexMessage } = regexValidation(user)
-        const { isValid, alertMessage } = await validateUser(user)
-
-        if (regexMessage) {
-            setMessage(regexMessage)
-            return
-        }
-
-        if (!isValid) {
-            setMessage(alertMessage)
-            return
-        }
-        
-        const response = await fetch("http://localhost:4000/users", {
-            method: "POST",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(user)
-        })
-        
-        if (!response?.ok) {
-            setMessage(alertMessage)
-            return
-        }
-
-        setMessage(alertMessage)
-
-        return { isUserRegistered: true }
     }
 
     return (
