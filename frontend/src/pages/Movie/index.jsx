@@ -16,7 +16,7 @@ function Movie() {
 
     useEffect(() => {
         const getMovie = async () => {
-            const response = await fetch(`http://localhost:4000/movies/${params.title}`)
+            const response = await fetch(`http://localhost:4000/movies/${params.id}`)
             const data = await response.json()
             setMovie(data[0])
         }
@@ -26,13 +26,12 @@ function Movie() {
 
     useEffect(() => {
         const getRecommended = async () => {
-            const response = await fetch(`http://localhost:4000/genre/${params.title}`)
+            const response = await fetch(`http://localhost:4000/genre/${params.id}`)
             const data = await response.json()
             if (data.movies < 2) {
                 return
             }
             setRecommended(data.genreResults)
-            console.log(recommended)
         }
         getRecommended()
     }, [params.title])
@@ -46,12 +45,14 @@ function Movie() {
                     <Banner image={movie.background} title={movie.title}/>
                     <Container title="Details">
                         <MovieDetail movie={movie}/>
-                        <div className={styles.container}>
-                        {
-                            recommended && 
-                                recommended.map(r => <VerticalCard key={r.title} movie={r}/>)
+                        {recommended && 
+                            <>
+                                <h2>Related Movies</h2>
+                                <div className={styles.container}>
+                                    {recommended.map(r => <VerticalCard key={r.title} movie={r}/>)}
+                                </div>
+                            </>
                         }
-                        </div>
                     </Container>
                     <Footer />
                 </>

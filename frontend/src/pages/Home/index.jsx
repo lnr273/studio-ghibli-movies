@@ -39,7 +39,7 @@ function Home() {
                     <div className={styles.container}>
                         {movies.map(movie => movie.id < 7 && (
                             <Card key={movie.id} movie={movie}/>
-                        ))}                        
+                        ))}
                     </div>
                     <Button value="/movies">See More</Button>
                 </Container>

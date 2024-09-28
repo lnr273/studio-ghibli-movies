@@ -12,6 +12,24 @@ function RegisterForm() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        const body = {
+            username,
+            email,
+            password
+        }
+
+        const response = await fetch("http://localhost:4000/register", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(body)
+        })
+        const data = await response.json()
+        
+        if (data.error) {
+            setMessage(data.error)
+        } else {
+            setMessage(data.message)
+        }
     }
 
     return (
@@ -55,7 +73,6 @@ function RegisterForm() {
             </form>
             {
                 message && <div className={styles.message}>{message}</div>
-                // CSS
             }
         </div>
 

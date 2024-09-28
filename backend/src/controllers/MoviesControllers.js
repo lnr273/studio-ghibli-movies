@@ -11,11 +11,11 @@ class MoviesControllers {
         }
     }
     
-    async showMovieByTitle(req, res) {
+    async showMovieById(req, res) {
         try {
-            const { title } = req.params;
-            const sql = "SELECT * FROM movies WHERE title = ?";
-            const [results] = await connection.query(sql, title);
+            const { id } = req.params;
+            const sql = "SELECT * FROM movies WHERE id = ?";
+            const [results] = await connection.query(sql, id);
             return res.status(200).json(results);
         } catch (err) {
             return res.status(404).json({ error: "Server error" });
@@ -24,16 +24,16 @@ class MoviesControllers {
     
     async showMoviesByGenre(req, res) {
         try {
-            const { title } = req.params;
-            const selectTitleSql = "SELECT * FROM movies WHERE title = ?";
-            const [titleResults] = await connection.query(selectTitleSql, title);
-            if (titleResults.length < 1) {
-                return res.status(404).json({ error: `Title ${title} is not included in the database` });
+            const { id } = req.params;
+            const selectIdSql = "SELECT * FROM movies WHERE id = ?";
+            const [firstResults] = await connection.query(selectIdSql, id);
+            if (firstResults.length < 1) {
+                return res.status(404).json({ error: `This movie is not included in the database` });
             }
 
-            const genre = `%${titleResults[0].genre}%`;
-            const selectGenreSql = `SELECT title, poster, year FROM movies WHERE genre LIKE ? AND NOT title = ?`;
-            const [genreResults] = await connection.query(selectGenreSql, [genre, title]);
+            const genre = `%${firstResults[0].genre}%`;
+            const selectGenreSql = `SELECT title, poster, year FROM movies WHERE genre LIKE ? AND NOT id = ?`;
+            const [genreResults] = await connection.query(selectGenreSql, [genre, id]);
 
             if (genreResults < 1) {
                 return res.status(404).json({ moviesRecommended: false });
@@ -72,7 +72,7 @@ class MoviesControllers {
     
     async showFavorites(req, res) {
         try {
-            const { id } = req.user
+            const { id } = req.params
             const sql = "SELECT movieId FROM favorites WHERE userId = ?";
             const [results] = await connection.query(sql, id);
             return res.status(200).json(results);
@@ -83,9 +83,9 @@ class MoviesControllers {
 
     async addFavorite(req, res) {
         try {
-            const { id } = req.user
+            const { id } = req.params
             const { movieId } = req.body
-            const sql = "INSERT INTO favorites (userId, movieId) VALUES (?, ?)"
+            const sql = "INSERT INTO favorites VALUES (?, ?)"
             const [results] = await connection.query(sql, [id, movieId])
             return res.status(200).json({ results, alertMessage: "Movie added to favorites" })
         } catch (err) {
@@ -95,7 +95,7 @@ class MoviesControllers {
 
     async removeFavorite(req, res) {
         try {
-            const { id } = req.user
+            const { id } = req.params
             const { movieId } = req.body
             const sql = "DELETE FROM favorites WHERE userId = ? and movieId = ?"
             const [results] = await connection.query(sql, [id, movieId])

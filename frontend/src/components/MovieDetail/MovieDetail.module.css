@@ -4,18 +4,36 @@
 }
 
 .movieDetail .poster {
-    width: 430px;
+    width: 500px;
     height: auto;
 }
 
 .table {
     display: flex;
     width: 530px;
-    max-height: 610px;
     margin-left: 100px;
 }
 
 .table th, td {
     padding: 10px;
     max-height: 80px;
+    text-align: start;
+}
+
+@media(max-width: 1200px) {
+    .movieDetail {
+        flex-direction: column;
+    }
+    .movieDetail .poster {
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width: 720px) {
+    .movieDetail .poster {
+        width: 380px;
+    }
+    .movieDetail .table {
+        width: 380px;
+    }
 }

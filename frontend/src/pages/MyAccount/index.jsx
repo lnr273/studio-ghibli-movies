@@ -4,20 +4,28 @@ import Footer from '../../components/Footer';
 import LoginForm from '../../components/LoginForm';
 import styles from './MyAccount.module.css';
 import RegisterForm from '../../components/RegisterForm';
+import getCookie from "../../hooks/getCookie.js";
+import LoggedIn from '../../components/LoggedIn/index.jsx';
 
-function Login() {
+function MyAccount() {
     return (
         <>
             <Header />
             <Container>
-                <div className={styles.forms}>
-                    <LoginForm />
-                    <RegisterForm />
-                </div>
+                {
+                    getCookie("user") ? (
+                        <LoggedIn />
+                    ) : (
+                        <div className={styles.forms}>
+                            <LoginForm />
+                            <RegisterForm />
+                        </div>                  
+                    )
+                }
             </Container>
             <Footer />
         </>
     );
 }
 
-export default Login
+export default MyAccount

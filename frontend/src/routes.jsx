@@ -16,7 +16,7 @@ function AppRoutes() {
                 <Routes>
                     <Route path="/" element={<Home />} ></Route>
                     <Route path="/movies" element={<Movies />} ></Route>
-                    <Route path="/movies/:title" element={<Movie />} ></Route>
+                    <Route path="/movies/:id" element={<Movie />} ></Route>
                     <Route path="/favorites" element={<Favorites />} ></Route>
                     <Route path="/about" element={<About />} ></Route>
                     <Route path="/search/:s" element={<Search />} ></Route>

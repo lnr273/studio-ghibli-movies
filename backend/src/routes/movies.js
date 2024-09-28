@@ -5,12 +5,12 @@ import { isLoggedIn } from "../../middleware/login.js";
 const moviesRouter = Router();
 
 moviesRouter.get("/movies", MoviesControllers.showAllMovies);
-moviesRouter.get("/movies/:title", MoviesControllers.showMovieByTitle);
-moviesRouter.get("/genre/:title", MoviesControllers.showMoviesByGenre);
+moviesRouter.get("/movies/:id", MoviesControllers.showMovieById);
+moviesRouter.get("/genre/:id", MoviesControllers.showMoviesByGenre);
 moviesRouter.get("/search/:s", MoviesControllers.searchMovies);
 moviesRouter.get("/movies-for-home", MoviesControllers.showMoviesForHome);
-moviesRouter.get("/favorites", isLoggedIn, MoviesControllers.showFavorites);
-moviesRouter.post("/favorites", isLoggedIn, MoviesControllers.addFavorite);
-moviesRouter.delete("/favorites", isLoggedIn, MoviesControllers.removeFavorite);
+moviesRouter.get("/favorites/:id", MoviesControllers.showFavorites);
+moviesRouter.post("/favorites/:id", MoviesControllers.addFavorite);
+moviesRouter.delete("/favorites/:id", MoviesControllers.removeFavorite);
 
 export default moviesRouter;

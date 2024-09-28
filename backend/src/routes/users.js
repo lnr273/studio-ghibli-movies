@@ -7,7 +7,7 @@ userRouter.get("/users", UsersControllers.showAllUsers);
 userRouter.get("/users/:id", UsersControllers.showUserById);
 
 // REGISTER A NEW USER
-userRouter.post("/users", UsersControllers.register);
+userRouter.post("/register", UsersControllers.register);
 
 // USER LOGIN
 userRouter.post("/login", UsersControllers.login);

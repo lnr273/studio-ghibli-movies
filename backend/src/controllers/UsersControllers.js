@@ -101,8 +101,12 @@ class UsersControllers {
         try {
             const { id } = req.params;
             const sql = "DELETE FROM users WHERE id = ?";
-            const result = await query(sql, id, "Not able to delete");
-            res.status(204).json(result);
+            const [results] = await connection.query(sql, id)
+            console.log(results)
+            if (results.affectedRows < 1) {
+                return res.status(400).json({ error: "User does not exists"})
+            }
+            res.status(204).json(results);
         } catch (err) {
             res.status(400).send(err);
         }

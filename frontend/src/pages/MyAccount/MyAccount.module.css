@@ -2,6 +2,9 @@
     display: flex;
     width: 100%;
 }
+.logged {
+    padding-top: 200px;
+}
 
 @media(max-width: 1220px) {
     .forms {

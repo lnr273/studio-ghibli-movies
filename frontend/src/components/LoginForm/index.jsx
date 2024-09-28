@@ -1,41 +1,50 @@
 import { useState } from 'react';
-import styles from './LoginForm.module.css'
+import setCookie from "../../hooks/setCookie.js"
+import removeCookie from "../../hooks/setCookie.js"
+import styles from "./LoginForm.module.css";
 
 function LoginForm() {
 
-    const [username, setUsername] = useState("")
-    const [email, setEmail] = useState("")
+    const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
+    const [message, setMessage] = useState("")
 
     async function handleSubmit(e) {
         e.preventDefault()
+        const body = {
+            user,
+            password
+        }
 
+        const response = await fetch("http://localhost:4000/login", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(body)
+        })
+        const data = await response.json()
+        if (data.error) {
+            setMessage(data.error)
+        }
+
+        const {token} = data
+
+        removeCookie("user")
+        setCookie("user", token)
+        window.location.reload()
     }
-
     return (
         <div className={styles.login}>
             <h2>Login to your account</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username</label>
+                <label htmlFor="user">E-mail or username</label>
                 <input 
-                    name="username" 
-                    id="username" 
+                    name="user" 
+                    id="user" 
                     type="text" 
                     autoComplete="off"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                    maxLength="30"
-                    required
-                />
-                <label htmlFor="email">E-mail</label>
-                <input 
-                    name="email" 
-                    id="email" 
-                    type="text" 
-                    autoComplete="off"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    maxLength="70"
+                    value={user}
+                    onChange={e => setUser(e.target.value)}
+                    maxLength="100"
                     required
                 />
                 <label htmlFor="password">Password</label>
@@ -50,6 +59,9 @@ function LoginForm() {
                     required
                 />
                 <button>Sign in</button>
+                {
+                message && <div className={styles.message}>{message}</div>
+                }
             </form>
         </div>
 

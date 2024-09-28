@@ -1,0 +1,43 @@
+.loggedin {
+    padding-top: 55px;
+}
+.loggedin h1 {
+    margin: 30px;
+}
+.loggedin .cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px;
+}
+.cards div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 120px;
+    margin: 10px;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.5s ease;
+}
+.cards div:hover {
+    background-color: hsl(196, 76%, 40%);
+    scale: 1.05;
+}
+
+.loggedin button {
+    width: 160px;
+    height: 40px;
+    margin-block: 1rem;
+    border: none;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: 0.5s ease;
+}
+.loggedin button:hover {
+    cursor: pointer;
+    background-color: var(--primary);
+}
