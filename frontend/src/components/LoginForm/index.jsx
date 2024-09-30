@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import setCookie from "../../hooks/setCookie.js"
 import removeCookie from "../../hooks/setCookie.js"
 import styles from "./LoginForm.module.css";
@@ -7,7 +8,19 @@ function LoginForm() {
 
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
+    const [type, setType] = useState("password")
+    const [icon, setIcon] = useState(<FiEyeOff/>)
     const [message, setMessage] = useState("")
+
+    function handleToggle() {
+        if (type==="password") {
+            setIcon(<FiEye/>)
+            setType("text")
+        } else {
+            setIcon(<FiEyeOff/>)
+            setType("password")
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -27,40 +40,45 @@ function LoginForm() {
         }
 
         const {token} = data
+        if (token) {
+            removeCookie("user")
+            setCookie("user", token)
+            window.location.reload()            
+        }
 
-        removeCookie("user")
-        setCookie("user", token)
-        window.location.reload()
     }
     return (
         <div className={styles.login}>
             <h2>Login to your account</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="user">E-mail or username</label>
-                <input 
-                    name="user" 
-                    id="user" 
-                    type="text" 
-                    autoComplete="off"
-                    value={user}
-                    onChange={e => setUser(e.target.value)}
-                    maxLength="100"
-                    required
-                />
+                <div>
+                    <input 
+                        name="user"
+                        type="text" 
+                        autoComplete="off"
+                        value={user}
+                        onChange={e => setUser(e.target.value)}
+                        maxLength="100"
+                        required
+                    />                    
+                </div>
                 <label htmlFor="password">Password</label>
-                <input 
-                    name="password" 
-                    id="password" 
-                    type="text" 
-                    autoComplete="off"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    maxLength="50"
-                    required
-                />
+                <div className={styles.pwdDiv}>
+                    <input 
+                        name="password"
+                        type={type} 
+                        autoComplete="off"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        maxLength="50"
+                        required
+                    />                    
+                    <span onClick={handleToggle}>{icon}</span>
+                </div>
                 <button>Sign in</button>
                 {
-                message && <div className={styles.message}>{message}</div>
+                    message && <div className={styles.message}>{message}</div>
                 }
             </form>
         </div>

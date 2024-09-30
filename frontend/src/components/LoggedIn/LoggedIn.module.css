@@ -6,24 +6,33 @@
 }
 .loggedin .cards {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 50px;
 }
 .cards div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 120px;
+    align-items: start;
+    justify-content: space-between;
+    height: 160px;
+    width: 250px;
     margin: 10px;
     background-color: var(--primary);
     color: var(--white);
     padding: 10px;
     border-radius: 8px;
     transition: 0.5s ease;
+    text-align: start;
 }
 .cards div:hover {
-    background-color: hsl(196, 76%, 40%);
     scale: 1.05;
+}
+
+.cards div button {
+    margin: 0;
+    width: 100px;
+    border-radius: 8px;
 }
 
 .loggedin button {

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './RegisterForm.module.css'
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 function RegisterForm() {
 
@@ -9,6 +10,18 @@ function RegisterForm() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [message, setMessage] = useState("")
+    const [type, setType] = useState("password")
+    const [icon, setIcon] = useState(<FiEyeOff/>)
+
+    function handleToggle() {
+        if (type==="password") {
+            setIcon(<FiEye/>)
+            setType("text")
+        } else {
+            setIcon(<FiEyeOff/>)
+            setType("password")
+        }
+    }
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -38,8 +51,7 @@ function RegisterForm() {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username</label>
                 <input 
-                    name="username" 
-                    id="username" 
+                    name="username"
                     type="text" 
                     autoComplete="off"
                     value={username}
@@ -49,9 +61,8 @@ function RegisterForm() {
                 />
                 <label htmlFor="email">E-mail</label>
                 <input 
-                    name="email" 
-                    id="email" 
-                    type="text" 
+                    name="email"
+                    type="email" 
                     autoComplete="off"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
@@ -59,16 +70,18 @@ function RegisterForm() {
                     required
                 />
                 <label htmlFor="password">Password</label>
-                <input 
-                    name="password" 
-                    id="password" 
-                    type="text" 
-                    autoComplete="off"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    maxLength="50"
-                    required
-                />
+                <div className={styles.pwdDiv}>
+                    <input
+                        name="password"
+                        type={type}
+                        autoComplete="off"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        maxLength="50"
+                        required
+                    />
+                    <span onClick={handleToggle}>{icon}</span>
+                </div>
                 <button>Sign Up</button>
             </form>
             {
