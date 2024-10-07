@@ -1,0 +1,53 @@
+.recEmailTitle {
+    margin-top: 100px;
+}
+
+.forgotForm {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    margin-block: 50px;
+}
+.forgotForm div {
+    display: flex;
+    flex-direction: column;
+}
+.forgotForm label, .forgotForm span {
+    padding-left: 10px;
+}
+.forgotForm input {
+    margin-block: 15px;
+}
+.forgotForm .close {
+    cursor: pointer;
+    width: fit-content;
+}
+.forgotForm button {
+    width: 120px;
+    height: 40px;
+    border: none;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 16px;
+    margin-inline: 10px;
+    margin-block: 25px;
+    cursor: pointer;
+}
+.forgotForm input {
+    width: 500px;
+    height: 40px;
+    border: 1px solid var(--black);
+    padding: 10px;
+    margin-inline: 10px;
+    background-color: #f1f1f1;
+}
+
+
+@media(max-width: 720px) {
+    .forgotForm {
+        width: 400px;
+    }
+    .forgotForm input {
+        width: 300px;
+    }
+}

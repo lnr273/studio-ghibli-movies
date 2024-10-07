@@ -1,0 +1,23 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #888;
+    width: 500px;
+}
+.card a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--black);
+}
+.card a span {
+    padding: 3px 0 0 5px;
+}
+
+@media(max-width: 720px) {
+    .card {
+        width: 300px;
+    }
+}

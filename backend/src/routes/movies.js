@@ -1,6 +1,5 @@
 import { Router } from "express";
 import MoviesControllers from "../controllers/MoviesControllers.js";
-import { isLoggedIn } from "../../middleware/login.js";
 
 const moviesRouter = Router();
 

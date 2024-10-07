@@ -1,0 +1,7 @@
+.message {
+    background-color: var(--black);
+    width: 500px;
+    color: var(--white);
+    padding: 15px;
+    margin-left: 10px;
+}

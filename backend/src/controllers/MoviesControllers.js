@@ -25,14 +25,14 @@ class MoviesControllers {
     async showMoviesByGenre(req, res) {
         try {
             const { id } = req.params;
-            const selectIdSql = "SELECT * FROM movies WHERE id = ?";
+            const selectIdSql = "SELECT genre FROM movies WHERE id = ?";
             const [firstResults] = await connection.query(selectIdSql, id);
             if (firstResults.length < 1) {
                 return res.status(404).json({ error: `This movie is not included in the database` });
             }
-
+            
             const genre = `%${firstResults[0].genre}%`;
-            const selectGenreSql = `SELECT title, poster, year FROM movies WHERE genre LIKE ? AND NOT id = ?`;
+            const selectGenreSql = `SELECT id, title, poster, year FROM movies WHERE genre LIKE ? AND NOT id = ?`;
             const [genreResults] = await connection.query(selectGenreSql, [genre, id]);
 
             if (genreResults < 1) {
@@ -48,7 +48,7 @@ class MoviesControllers {
         try {
             const { s } = req.params;
             const search = `%${s}%`;
-            const sql = "SELECT title, poster, year, genre FROM movies WHERE title LIKE ? OR year LIKE ? OR genre LIKE ?";
+            const sql = "SELECT id, title, poster, year, genre FROM movies WHERE title LIKE ? OR year LIKE ? OR genre LIKE ?";
             const [results] = await connection.query(sql, [search, search, search]);
             if (results.length < 1) {
                 return res.status(404).json({ ok: false, error: "Search not found" });

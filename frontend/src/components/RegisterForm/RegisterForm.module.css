@@ -7,6 +7,7 @@
 
 .register h2 {
     padding-left: 8px;
+    margin-left: 0;
 }
 
 .register label {
@@ -43,13 +44,6 @@
     cursor: pointer;
 }
 
-.register .message {
-    background-color: var(--black);
-    color: var(--white);
-    padding: 15px;
-    margin-left: 10px;
-}
-
 .pwdDiv {
     display: flex;
     justify-content: end;
@@ -57,7 +51,7 @@
 }
 .pwdDiv span {
     position: absolute;
-    padding-right: 25px;
+    padding-right: 20px;
 }
 
 @media(max-width: 820px) {

@@ -7,6 +7,7 @@
 
 .login h2 {
     padding-left: 8px;
+    margin-left: 0;
 }
 
 .login label {
@@ -14,7 +15,7 @@
     margin-block: 15px 5px;
 }
 
-.login form {
+.login .loginForm {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -40,10 +41,12 @@
     font-size: 16px;
     margin-inline: 10px;
     margin-block: 25px;
+    cursor: pointer;
 }
 
 .login .message {
     background-color: var(--black);
+    width: 500px;
     color: var(--white);
     padding: 15px;
     margin-left: 10px;
@@ -55,7 +58,14 @@
 }
 .pwdDiv span {
     position: absolute;
-    padding-right: 25px;
+    padding-right: 20px;
+}
+
+.loginForm .forgot {
+    padding: 8px 0 0 8px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--black);
 }
 
 @media(max-width: 820px) {

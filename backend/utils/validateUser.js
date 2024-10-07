@@ -12,7 +12,7 @@ export function validateUser(obj) {
         return { isValid: false, alertMessage: `Please provide a valid username. Maximum length is 30, yours ${obj.username.length}`}
     }
     if (!obj.email || obj.email > 100) {
-        return { isValid: false, alertMessage: `Please provide a valid email. Maximum length is 70, yours ${obj.email.length}`}
+        return { isValid: false, alertMessage: `Please provide a valid email. Maximum length is 100, yours ${obj.email.length}`}
     }
 
     return {isValid: true, alertMessage: "User registered sucessfully"}

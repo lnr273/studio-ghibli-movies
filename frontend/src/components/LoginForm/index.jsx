@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import setCookie from "../../hooks/setCookie.js"
-import removeCookie from "../../hooks/setCookie.js"
+import setCookie from "../../hooks/setCookie.js";
+import removeCookie from "../../hooks/setCookie.js";
 import styles from "./LoginForm.module.css";
+import { Link } from 'react-router-dom';
+import AlertMessage from '../AlertMessage/index.jsx';
 
 function LoginForm() {
 
@@ -24,10 +26,7 @@ function LoginForm() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        const body = {
-            user,
-            password
-        }
+        const body = {user,password}
 
         const response = await fetch("http://localhost:4000/login", {
             method: "POST",
@@ -43,15 +42,16 @@ function LoginForm() {
         if (token) {
             removeCookie("user")
             setCookie("user", token)
-            window.location.reload()            
+            window.location.reload()
         }
-
     }
+
+    
     return (
         <div className={styles.login}>
             <h2>Login to your account</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="user">E-mail or username</label>
+            <form className={styles.loginForm} onSubmit={handleSubmit}>
+                <label htmlFor="user">E-mail or username *</label>
                 <div>
                     <input 
                         name="user"
@@ -63,7 +63,7 @@ function LoginForm() {
                         required
                     />                    
                 </div>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password *</label>
                 <div className={styles.pwdDiv}>
                     <input 
                         name="password"
@@ -71,18 +71,20 @@ function LoginForm() {
                         autoComplete="off"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        maxLength="50"
+                        maxLength="100"
                         required
                     />                    
                     <span onClick={handleToggle}>{icon}</span>
                 </div>
+                <Link to="/forgot-password">
+                    <span className={styles.forgot}>Forgot password?</span>
+                </Link>
                 <button>Sign in</button>
                 {
-                    message && <div className={styles.message}>{message}</div>
+                    message && <AlertMessage>{message}</AlertMessage>
                 }
             </form>
         </div>
-
     );
 }
 

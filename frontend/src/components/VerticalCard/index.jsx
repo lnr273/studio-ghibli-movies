@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
-import whiteHeart from '../../assets/white-heart.svg'
-import redHeart from '../../assets/red-heart.svg'
-import styles from './VerticalCard.module.css'
+import whiteHeart from '../../assets/white-heart.svg';
+import redHeart from '../../assets/red-heart.svg';
+import styles from './VerticalCard.module.css';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import getCookie from '../../hooks/getCookie';
@@ -28,12 +28,11 @@ function VerticalCard({movie}) {
     async function isRepeated() {
         const repeated = favorites.filter(fav => fav.movieId === movie.id)
         if (repeated.length > 0) {
-            const response = await fetch(`http://localhost:4000/favorites/${user.id}`, {
+            fetch(`http://localhost:4000/favorites/${user.id}`, {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({movieId: repeated[0].movieId})
-            })            
-            const data = await response.json()
+            })
             return true
         }
         return false
@@ -43,12 +42,11 @@ function VerticalCard({movie}) {
         if (await isRepeated()) {
             return
         }
-        const response = await fetch(`http://localhost:4000/favorites/${user.id}`, {
+        fetch(`http://localhost:4000/favorites/${user.id}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({movieId: id})
         })
-        const data = await response.json()
         return
     }
 

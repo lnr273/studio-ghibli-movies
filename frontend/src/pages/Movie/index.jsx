@@ -22,7 +22,7 @@ function Movie() {
         }
         getMovie()
 
-    }, [params.title])
+    }, [params.id])
 
     useEffect(() => {
         const getRecommended = async () => {
@@ -34,7 +34,7 @@ function Movie() {
             setRecommended(data.genreResults)
         }
         getRecommended()
-    }, [params.title])
+    }, [params.id])
 
     return (
         <>

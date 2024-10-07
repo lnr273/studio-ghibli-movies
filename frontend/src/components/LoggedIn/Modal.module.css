@@ -1,0 +1,53 @@
+.modal {
+    width: 600px;
+    height: 350px;
+    background-color: var(--gray);
+    border-radius: 8px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.modal h2 {
+    color: var(--white);
+    margin-block: 10px;
+}
+.modal input {
+    width: 500px;
+    height: 40px;
+    border: 1px solid var(--black);
+    padding: 10px;
+    margin-inline: auto;
+    margin-block: 10px;
+    background-color: #f1f1f1;
+}
+.modal label {
+    padding-left: 8px;
+    margin-block: 15px 5px;
+    color: var(--white);
+}
+.modal span {
+    color: var(--white);
+    text-align: end;
+    margin: 12px 15px 0 0;
+    cursor: pointer;
+}
+.modal .pwdDiv {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.modal .pwdDiv span {
+    position: absolute;
+    padding: 0 45px 5px 0;
+    color: black;
+}
+
+@media(max-width: 720px) {
+    .modal {
+        width: 400px;
+    }
+    .modal input {
+        width: 300px;
+    }
+}

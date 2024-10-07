@@ -37,7 +37,7 @@ function MovieDetail({movie}) {
                                         <th>Awards</th><td>{movie.awards}</td>
                                     </tr>
                                     <tr>
-                                        <th>BoxOffice</th><td>${movie.boxoffice}</td>
+                                        <th>BoxOffice</th><td>{movie.boxoffice.toLocaleString("pt-br", {style: "currency", currency: "USD"})}</td>
                                     </tr>
                                     <tr>
                                         <th>Runtime</th><td>{movie.runtime} min</td>

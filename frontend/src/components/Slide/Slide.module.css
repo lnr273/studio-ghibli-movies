@@ -4,7 +4,6 @@ a {
 .slide {
     background-size: cover;
     border-radius: 10px;
-    /* border: 3px solid goldenrod; */
     display: flex;
     align-items: end;
 }
@@ -21,7 +20,7 @@ a {
     backdrop-filter: blur(5px);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    /* transition: 0.5s ease;  consertar essa transição */
+    margin: 0;
 }
 
 @media(max-width: 780px) {

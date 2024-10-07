@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './RegisterForm.module.css'
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import AlertMessage from "../AlertMessage/index.jsx";
 
 function RegisterForm() {
 
@@ -43,13 +44,17 @@ function RegisterForm() {
         } else {
             setMessage(data.message)
         }
+
+        setUsername("")
+        setEmail("")
+        setPassword("")
     }
 
     return (
         <div className={styles.register}>
             <h2>Register a new account</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Username *</label>
                 <input 
                     name="username"
                     type="text" 
@@ -59,7 +64,7 @@ function RegisterForm() {
                     maxLength="30"
                     required
                 />
-                <label htmlFor="email">E-mail</label>
+                <label htmlFor="email">E-mail *</label>
                 <input 
                     name="email"
                     type="email" 
@@ -69,7 +74,7 @@ function RegisterForm() {
                     maxLength="70"
                     required
                 />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Password *</label>
                 <div className={styles.pwdDiv}>
                     <input
                         name="password"
@@ -85,7 +90,7 @@ function RegisterForm() {
                 <button>Sign Up</button>
             </form>
             {
-                message && <div className={styles.message}>{message}</div>
+                message && <AlertMessage>{message}</AlertMessage>
             }
         </div>
 
