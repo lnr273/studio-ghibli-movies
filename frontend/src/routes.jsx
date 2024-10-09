@@ -21,8 +21,8 @@ function AppRoutes() {
                 <Route path="/about" element={<About />} ></Route>
                 <Route path="/search/:s" element={<Search />} ></Route>
                 <Route path="/myaccount" element={<MyAccount />} ></Route>
-                <Route path="/forgot-password" element={<EmailRecovery />} ></Route>
-                <Route path="/reset-password/:token" element={<ResetPassword />} ></Route>
+                <Route path="/myaccount/change-password" element={<EmailRecovery />} ></Route>
+                <Route path="/myaccount/reset-password/:token" element={<ResetPassword />} ></Route>
                 <Route path="*" element={<Page404 />} ></Route>
             </Routes>
         </BrowserRouter>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import ProfileLinks from "../ProfileLinks/index.jsx";
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import AlertMessage from "../AlertMessage/index.jsx";
+import { Link } from "react-router-dom";
 
 function LoggedIn() {
     const decoded = jwtDecode(getCookie("user"))
@@ -102,8 +103,9 @@ function LoggedIn() {
 
                 <button onClick={saveNewSettings}>Save</button>
             </div>
-            <span className={styles.change} onClick={openModal} style={{display: modal ? "none" : "block"}}>Change password</span>
-
+            <Link to="/myaccount/change-password">
+                <span className={styles.change}>Change password</span>
+            </Link>
             <div className={stylesModal.modal} style={{display: modal ? "flex" : "none"}}>
                 <span onClick={openModal}>X</span>
                 <h2>Change Password</h2>

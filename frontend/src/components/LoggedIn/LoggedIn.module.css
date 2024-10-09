@@ -72,6 +72,11 @@
     width: 700px;
 }
 
+.loggedin a {
+    color: var(--black);
+    margin-bottom: 5px;
+}
+
 @media(max-width: 720px) {
     .profile input {
         width: 350px;

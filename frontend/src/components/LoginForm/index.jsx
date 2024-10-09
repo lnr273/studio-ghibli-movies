@@ -76,7 +76,7 @@ function LoginForm() {
                     />                    
                     <span onClick={handleToggle}>{icon}</span>
                 </div>
-                <Link to="/forgot-password">
+                <Link to="/myaccount/change-password">
                     <span className={styles.forgot}>Forgot password?</span>
                 </Link>
                 <button>Sign in</button>
