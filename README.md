@@ -3,7 +3,7 @@
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
-![home page](frontend/images/home-page2.png)
+![home page](frontend/images/home-page.png)
 
 ## About
 Full-stack project featuring films produced by Studio Ghibli. There you can view informations about the films, see the most popular ones, search for films (by name, year or genre), like to save them to your account and read about the studio.
