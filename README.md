@@ -12,7 +12,7 @@ Full-stack project featuring films produced by Studio Ghibli. There you can view
 
 - Built using React and some other frameworks like React Router, React Icons, React Slick, etc.
 ### Back-end
-- Built using NodeJS, ExpressJS, MySQL2, etc.
+- Built using NodeJS, ExpressJS, MySQL, etc.
 ## 💻 Prerequisites
 - NodeJS >= 20.11.0
 - MySQL >= 8.0.27
@@ -120,9 +120,6 @@ DELETE /favorites/{movie_id} Delete a movie from a specific user's list
 ```
 GET /banner/{name} List an image for banner by name
 ```
-
-## 📃 License
-This project is under [MIT](LICENSE) license
 
 ## Next steps
 - Add feature to filter movies by year (ascending or descending) or name
