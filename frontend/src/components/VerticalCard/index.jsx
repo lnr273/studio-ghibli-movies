@@ -3,21 +3,19 @@ import { Link } from 'react-router-dom';
 import whiteHeart from '../../assets/white-heart.svg';
 import redHeart from '../../assets/red-heart.svg';
 import styles from './VerticalCard.module.css';
-import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import getCookie from '../../hooks/getCookie';
 
 function VerticalCard({movie}) {
 
     const [favorites, setFavorites] = useState([])
-    const [user, setUser] = useState("")
+    const [token, setToken] = useState("")
 
     useEffect(() => {
-        const token = getCookie("user")
+        setToken(getCookie("user"))
         if (token) {
-            setUser(jwtDecode(token))
             const getFav = async () => {
-                const response = await fetch(`http://localhost:4000/favorites/${user.id}`)
+                const response = await fetch(`http://localhost:4000/favorites/${token}`)
                 const data = await response.json()
                 setFavorites(data)
             }
@@ -28,7 +26,7 @@ function VerticalCard({movie}) {
     async function isRepeated() {
         const repeated = favorites.filter(fav => fav.movieId === movie.id)
         if (repeated.length > 0) {
-            fetch(`http://localhost:4000/favorites/${user.id}`, {
+            fetch(`http://localhost:4000/favorites/${token}`, {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({movieId: repeated[0].movieId})
@@ -42,7 +40,7 @@ function VerticalCard({movie}) {
         if (await isRepeated()) {
             return
         }
-        fetch(`http://localhost:4000/favorites/${user.id}`, {
+        fetch(`http://localhost:4000/favorites/${token}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({movieId: id})

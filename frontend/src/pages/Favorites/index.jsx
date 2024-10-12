@@ -7,7 +7,6 @@ import Button from '../../components/Button';
 import VerticalCard from '../../components/VerticalCard/index.jsx';
 import getCookie from "../../hooks/getCookie.js";
 import { useEffect, useState } from 'react';
-import { jwtDecode } from "jwt-decode";
 
 function Favorites() {
 
@@ -29,8 +28,7 @@ function Favorites() {
         const getFavorites = async () => {
             const token = getCookie("user")
             if (token) {
-                const decoded = jwtDecode(token)
-                const response = await fetch(`http://localhost:4000/favorites/${decoded.id}`)
+                const response = await fetch(`http://localhost:4000/favorites/${token}`)
                 const data = await response.json()
                 setFavorites(data)
                 return
