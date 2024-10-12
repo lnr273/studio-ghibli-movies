@@ -109,11 +109,11 @@ GET /search/{s} Search for movies
 
 GET /movies-for-home List movies to be recommended in the Home page
 
-GET /favorites/{user_id} List all favorites of a specific user
+GET /favorites/{token} List all favorites of a specific user
 
-POST /favorites/{movie_id} Register a new favorite to a specific user
+POST /favorites/{token} Register a new favorite to a specific user
 
-DELETE /favorites/{movie_id} Delete a movie from a specific user's list 
+DELETE /favorites/{token} Delete a movie from a specific user's list 
 ```
 
 - Banner Database
