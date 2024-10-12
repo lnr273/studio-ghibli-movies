@@ -1,4 +1,5 @@
 import { connection } from "../server.js";
+import { jwtDecode } from 'jwt-decode';
 
 class MoviesControllers {
     async showAllMovies(req, res) {
@@ -72,9 +73,10 @@ class MoviesControllers {
     
     async showFavorites(req, res) {
         try {
-            const { id } = req.params
+            const { token } = req.params;
+            const decoded = jwtDecode(token);
             const sql = "SELECT movieId FROM favorites WHERE userId = ?";
-            const [results] = await connection.query(sql, id);
+            const [results] = await connection.query(sql, decoded.id);
             return res.status(200).json(results);
         } catch (err) {
             return res.status(404).json({ error: "Server error" });
@@ -83,10 +85,11 @@ class MoviesControllers {
 
     async addFavorite(req, res) {
         try {
-            const { id } = req.params
+            const { token } = req.params
             const { movieId } = req.body
+            const decoded = jwtDecode(token)
             const sql = "INSERT INTO favorites VALUES (?, ?)"
-            const [results] = await connection.query(sql, [id, movieId])
+            const [results] = await connection.query(sql, [decoded.id, movieId])
             return res.status(200).json({ results, alertMessage: "Movie added to favorites" })
         } catch (err) {
             return res.status(400).json({ error: "Server error" })
@@ -95,10 +98,11 @@ class MoviesControllers {
 
     async removeFavorite(req, res) {
         try {
-            const { id } = req.params
+            const { token } = req.params
             const { movieId } = req.body
+            const decoded = jwtDecode(token)
             const sql = "DELETE FROM favorites WHERE userId = ? and movieId = ?"
-            const [results] = await connection.query(sql, [id, movieId])
+            const [results] = await connection.query(sql, [decoded.id, movieId])
             return res.status(200).json({ results, alertMessage: "Movie removed from favorites" })
         } catch (err) {
             return res.status(400).json({ error: "Server error" })
